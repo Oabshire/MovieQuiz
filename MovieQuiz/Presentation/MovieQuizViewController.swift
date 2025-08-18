@@ -44,7 +44,7 @@ final class MovieQuizViewController: UIViewController {
             text: "Рейтинг этого фильма больше чем 6?",
             correctAnswer: false)
     ]
-    @IBOutlet private weak var qestionTitleLabel: UILabel!
+    @IBOutlet private weak var questionTitleLabel: UILabel!
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var indexLabel: UILabel!
     @IBOutlet private weak var questionLabel: UILabel!
@@ -57,28 +57,28 @@ final class MovieQuizViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        qestionTitleLabel.font = UIFont(name: "YSDisplay-Medium", size: 20)
-        indexLabel.font = UIFont(name: "YSDisplay-Medium", size: 20)
-        questionLabel.font = UIFont(name: "YSDisplay-Bold", size: 23)
-        yesButton.titleLabel?.font = UIFont(name: "YSDisplay-Medium", size: 20)
-        noButton.titleLabel?.font = UIFont(name: "YSDisplay-Medium", size: 20)
+        questionTitleLabel.font = Fonts.ysDisplayMedium20
+        indexLabel.font = Fonts.ysDisplayMedium20
+        questionLabel.font = Fonts.ysDisplayBold23
+        yesButton.titleLabel?.font = Fonts.ysDisplayMedium20
+        noButton.titleLabel?.font = Fonts.ysDisplayMedium20
 
         let currentStep = convert(model: questions[currentQuestionIndex])
         show(quiz: currentStep)
 
     }
-    // MARK: - Private funcs 
+    // MARK: - Private funcs
     @IBAction private func noButtonClicked(_ sender: Any) {
         if !questions[currentQuestionIndex].correctAnswer {
             correctAnswers += 1
         }
-        showAnswerResult(isCorrect: questions[currentQuestionIndex].correctAnswer == false)
+        showAnswerResult(isCorrect: !questions[currentQuestionIndex].correctAnswer)
     }
     @IBAction private func yesButtonClicked(_ sender: Any) {
         if questions[currentQuestionIndex].correctAnswer {
             correctAnswers += 1
         }
-        showAnswerResult(isCorrect: questions[currentQuestionIndex].correctAnswer == true)
+        showAnswerResult(isCorrect: questions[currentQuestionIndex].correctAnswer)
     }
 
     private func showAnswerResult(isCorrect: Bool) {
@@ -143,7 +143,7 @@ final class MovieQuizViewController: UIViewController {
 
         alert.addAction(action)
 
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
