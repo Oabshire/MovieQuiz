@@ -80,7 +80,7 @@ extension StatisticService: StatisticServiceProtocol {
         totalQuestionsAsked += amount
         gamesCount += 1
         let currentGame = GameResult(correct: count, total: amount, date: Date())
-        if currentGame.isBetterThan(bestGame) {
+        if !bestGame.isBetterThan(currentGame) {
             bestGame = currentGame
         }
     }
